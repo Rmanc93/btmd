@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material';
 import { roleList } from 'src/app/Utils/roleList';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-main-nav',
@@ -20,6 +21,7 @@ export class MainNavComponent {
   taskList: any = "";
   roleList = roleList;
 
+  options: FormGroup;
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -30,7 +32,13 @@ export class MainNavComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private cookieService: CookieService) {
+    private cookieService: CookieService,
+    fb: FormBuilder) {
+      this.options = fb.group({
+        bottom: 0,
+        fixed: false,
+        top: 0
+      });
   }
 
   componentAdded(component) {
